@@ -1,0 +1,25 @@
+# === 1. Core Backend (FastAPI & Server) ===
+fastapi
+uvicorn[standard]
+python-dotenv
+requests
+
+# === 2. AI/ML Core (PyTorch & Image Processing) ===
+torch
+torchvision
+numpy
+Pillow
+opencv-python-headless # For image manipulation (Grad-CAM, quality check)
+
+# === 3. Image Enhancement (Real-ESRGAN Dependencies) ===
+# This sequence ensures the core libraries for Real-ESRGAN are installed correctly.
+realesrgan
+basicsr
+gfpgan
+facexlib
+
+# === 4. LLM and RAG Engine ===
+# The 'openai' library is used for compatibility with Groq/OpenRouter endpoints.
+openai
+faiss-cpu # Vector store for the RAG treatment database (CPU version)
+scikit-learn # General utility for ML/RAG preprocessing

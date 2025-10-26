@@ -3,4 +3,4 @@ __pycache__
 .env
 models/*.pt
 data/faiss_index/
-venv/
+docenv/
