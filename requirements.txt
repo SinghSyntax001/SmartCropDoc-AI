@@ -21,6 +21,5 @@ facexlib
 
 # === 4. LLM and RAG Engine ===
 # The 'openai' library is used for compatibility with Groq/OpenRouter endpoints.
-openai
-faiss-cpu # Vector store for the RAG treatment database (CPU version)
-scikit-learn # General utility for ML/RAG preprocessing
+openai==1.0.0
+groq==0.9.0
