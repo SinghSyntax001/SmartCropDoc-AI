@@ -1,8 +1,9 @@
-# === 1. Core Backend (FastAPI & Server) ===
-fastapi
-uvicorn[standard]
-python-dotenv
-requests
+# === 1. Core Backend (Flask & Server) ===
+Flask==2.3.0
+Flask-CORS==4.0.0
+python-dotenv==1.0.0
+requests==2.31.0
+Werkzeug==2.3.0
 
 # === 2. AI/ML Core (PyTorch & Image Processing) ===
 torch
