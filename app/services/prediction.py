@@ -25,7 +25,7 @@ DISEASE_CLASSES = [
 # ==========================================================
 # MODEL LOADING
 # ==========================================================
-def load_mobilenet_model(weights_path: str):
+def load_mobilenet_model(weights_path: str = "mobilenetv3_best.pth"):
     """
     Load MobileNetV3-Large model with trained weights.
     Compatible with Flask import: app.services.prediction.load_mobilenet_model
@@ -42,6 +42,7 @@ def load_mobilenet_model(weights_path: str):
     model.eval()
     print(f"✅ MobileNetV3 model loaded successfully from {weights_path}")
     return model
+
 
 # ==========================================================
 # IMAGE PREPROCESSING
