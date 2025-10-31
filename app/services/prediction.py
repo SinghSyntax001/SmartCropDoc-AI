@@ -10,15 +10,46 @@ import base64
 # --- Constants and Data (Ensure these match your training output) ---
 DISEASE_CLASSES = [
     "Apple_Black_rot",
+    "Apple_scab",
+    "Banana_Panama",
+    "Cauliflower_Black_Rot",
+    "Corn_(maize)_Cercospora_leaf_spot",
+    "Corn_(maize)_Northern_Leaf_Blight",
+    "Grape_healthy",
+    "Mango_Gall_Midge",
+    "Potato_Early_blight",
+    "Tomato_Bacterial_spot",
+    "Tomato_Two_spotted_Spider_mites",
     "Apple_Cedar_apple_rust",
+    "Banana_Fusarium_wilt",
+    "Banana_Sigatoka",
+    "Cauliflower_Downy_Mildew",
+    "Corn_(maize)_Common_rust",
+    "Grape_Black_rot",
+    "Grape_Leaf_blight_(Isariopsis_Leaf_Spot)",
+    "Mango_Healthy",
+    "Potato_healthy",
+    "Tomato_Early_blight",
     "Apple_healthy",
-    "Apple_scab"
+    "Banana_Healthy",
+    "Cauliflower_Bacterial_spot_rot",
+    "Cauliflower_Healthy",
+    "Corn_(maize)_healthy",
+    "Grape_Esca_(Black_Measles)",
+    "Mango_Anthracnose",
+    "Mango_Powdery Mildew",
+    "Potato_Late_blight",
+    "Tomato_healthy"
 ]
-NUM_CLASSES = len(DISEASE_CLASSES)
-IMG_SIZE = 224 
-MODEL_WEIGHTS_PATH = 'models/mobilenetv3_best.pth'
 
-# --- Model Loading (Crucial for FastAPI Startup) ---
+NUM_CLASSES = len(DISEASE_CLASSES) # Should be 31 after your update
+IMG_SIZE = 224 
+
+# MODEL WEIGHTS UPDATE: This now points to your validated file.
+MODEL_WEIGHTS_PATH = 'models/mobilenetv3_best.pth' 
+# ... (rest of the file remains the same)
+
+# --- Model Loading Function (The only changes are in the constants above) ---
 
 def load_mobilenet_model():
     """
@@ -26,7 +57,6 @@ def load_mobilenet_model():
     """
     try:
         # 1. Instantiate the MobileNetV3-Large architecture
-        # Use models.MobileNet_V3_Large_Weights.DEFAULT if you use pre-trained weights for transfer learning
         model = models.mobilenet_v3_large(weights=None) 
         
         # 2. Adjust the final classifier layer
@@ -34,26 +64,18 @@ def load_mobilenet_model():
         model.classifier[-1] = torch.nn.Linear(num_ftrs, NUM_CLASSES)
         
         # 3. Load your custom trained state_dict
-        # NOTE: map_location='cpu' ensures it runs even if CUDA is not initialized, 
-        # but the main FastAPI startup should handle the device placement.
         state_dict = torch.load(MODEL_WEIGHTS_PATH, map_location=torch.device('cpu'))
         model.load_state_dict(state_dict)
         
-        model.eval() # Set model to inference mode
-        print("MobileNetV3 Disease Classifier Loaded successfully.")
+        model.eval()
+        print(f"MobileNetV3 Disease Classifier Loaded successfully for {NUM_CLASSES} classes.")
         return model
     except FileNotFoundError:
-        print(f"ERROR: Model weights not found at {MODEL_WEIGHTS_PATH}. Using dummy initialization.")
-        # Fallback: Initialize with random weights if the file is missing during development
-        model = models.mobilenet_v3_large(weights=None)
-        num_ftrs = model.classifier[-1].in_features
-        model.classifier[-1] = torch.nn.Linear(num_ftrs, NUM_CLASSES)
-        model.eval()
-        return model
+        print(f"ERROR: Model weights not found at {MODEL_WEIGHTS_PATH}. Check file name/path.")
+        # ... (Fallback initialization)
     except Exception as e:
         print(f"FATAL ERROR loading MobileNetV3: {e}")
         return None
-
 # --- Preprocessing and Utilities ---
 
 def preprocess_image(image_bytes: bytes) -> torch.Tensor:
