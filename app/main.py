@@ -79,7 +79,7 @@ def serve_image(filename):
 def render_html_file(filename):
     """Helper function to render HTML files with Jinja2 templating"""
     try:
-        with open(APP_ROOT / 'frontend' / filename, 'r') as f:
+        with open(APP_ROOT / 'frontend' / filename, 'r', encoding='utf-8') as f:
             content = f.read()
         return render_template_string(content)
     except Exception as e:
