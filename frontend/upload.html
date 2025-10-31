@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload & Analyze - CropGuard AI</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+    <!-- NAVIGATION -->
+    <section class="hero">
+      <nav>
+        <div class="logo-container">
+          <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="CropGuard AI Logo" /></a>
+          <h2 class="logo-heading">CropGuard AI</h2>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li>
+              <a href="/">HOME</a>
+            </li>
+            <li>
+              <a href="/about">ABOUT</a>
+            </li>
+            <li>
+              <a href="/guide">GUIDE</a>
+            </li>
+            {% if logged_in %}
+              <li>
+                <a href="/profile">PROFILE</a>
+              </li>
+              <li>
+                <a href="/logout">LOGOUT</a>
+              </li>
+            {% else %}
+              <li>
+                <a href="/login">LOGIN</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+        <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+      </nav>
+    </section>
+
+    <!-- HERO SECTION FOR UPLOAD PAGE -->
+    <section class="upload-hero">
+      <h1>🚀 Upload & Analyze Your Crop</h1>
+      <p>Take a clear photo of your crop leaf and let AI detect diseases in seconds.</p>
+    </section>
+
+    <!-- MAIN UPLOAD SECTION -->
+    <section class="upload-section">
+      <div class="upload-container">
+        <!-- FILE UPLOAD FORM -->
+        <div class="upload-form">
+          <h2>Disease Detection</h2>
+
+          <!-- Drag and Drop Zone -->
+          <div class="file-input-wrapper" id="dropZone">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <p>Drag and drop your image here or click to select</p>
+            <input
+              type="file"
+              id="imageInput"
+              accept=".jpg,.jpeg,.png"
+              style="display: none"
+            />
+          </div>
+
+          <!-- Image Preview -->
+          <div id="imagePreview" class="image-preview" style="display: none">
+            <img id="previewImg" src="" alt="Preview" />
+            <button type="button" onclick="clearImage()" class="btn-secondary">
+              <i class="fa-solid fa-trash"></i> Change Image
+            </button>
+          </div>
+
+          <!-- Language Selector -->
+          <div class="form-group">
+            <label for="languageCode">Recommendation Language:</label>
+            <select id="languageCode">
+              <option value="en">English</option>
+              <option value="hi">Hindi (हिंदी)</option>
+              <option value="es">Spanish (Español)</option>
+              <option value="fr">French (Français)</option>
+              <option value="pt">Portuguese (Português)</option>
+              <option value="zh">Chinese (中文)</option>
+              <option value="ja">Japanese (日本語)</option>
+              <option value="ru">Russian (Русский)</option>
+              <option value="de">German (Deutsch)</option>
+            </select>
+          </div>
+
+          <!-- Submit Button -->
+          <button id="uploadBtn" class="btn" onclick="handleFileUpload()">
+            <i class="fa-solid fa-upload"></i> Upload & Analyze
+          </button>
+        </div>
+
+        <!-- LOADING STATE -->
+        <div id="loadingContainer" class="loading-container" style="display: none">
+          <div class="spinner"></div>
+          <p>Analyzing your image... Please wait</p>
+        </div>
+
+        <!-- ERROR STATE -->
+        <div id="errorContainer" class="error-container" style="display: none">
+          <div class="error-content">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <h3>Upload Failed</h3>
+            <p id="errorMessage"></p>
+            <button class="btn" onclick="resetForm()">
+              <i class="fa-solid fa-rotate-right"></i> Try Again
+            </button>
+          </div>
+        </div>
+
+        <!-- RESULTS SECTION -->
+        <div id="resultsContainer" class="results-container" style="display: none">
+          <!-- Result Header -->
+          <div class="result-header">
+            <h2>
+              <i class="fa-solid fa-circle-check"></i>
+              Disease Detected: <span id="diseaseName"></span>
+            </h2>
+          </div>
+
+          <!-- Result Grid -->
+          <div class="result-grid">
+            <!-- Metrics -->
+            <div class="metrics">
+              <div class="metric-item">
+                <span class="metric-label">Confidence</span>
+                <span class="metric-value" id="confidenceValue">0%</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-label">Severity Level</span>
+                <span class="metric-value" id="severityValue">0/5</span>
+                <div class="severity-bar" id="severityBar"></div>
+              </div>
+              <div class="metric-item">
+                <span class="metric-label">Image Quality</span>
+                <span class="metric-value" id="qualityValue">Good</span>
+              </div>
+            </div>
+
+            <!-- Visualization (Grad-CAM) -->
+            <div class="visualization">
+              <img id="gradcamImage" src="" alt="Disease heatmap" />
+              <p class="caption">
+                <i class="fa-solid fa-circle-info"></i>
+                Red areas indicate disease location
+              </p>
+            </div>
+          </div>
+
+          <!-- Recommendation Section -->
+          <div class="recommendation-section">
+            <h3>
+              <i class="fa-solid fa-prescription-bottle"></i>
+              Treatment Recommendation
+            </h3>
+            <div class="recommendation-text" id="recommendationText"></div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="action-buttons">
+            <button class="btn" onclick="downloadResult()">
+              <i class="fa-solid fa-download"></i> Download Report
+            </button>
+            <button class="btn-secondary" onclick="uploadAnother()">
+              <i class="fa-solid fa-rotate-right"></i> Upload Another
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TIPS SECTION -->
+    <section class="tips-section">
+      <h2>Tips for Best Results</h2>
+      <div class="tips-grid">
+        <div class="tip-card">
+          <i class="fa-solid fa-image"></i>
+          <h4>Clear Images</h4>
+          <p>Take clear, well-lit photos of affected leaves from multiple angles.</p>
+        </div>
+        <div class="tip-card">
+          <i class="fa-solid fa-sun"></i>
+          <h4>Good Lighting</h4>
+          <p>Avoid shadows. Natural daylight works best for accurate detection.</p>
+        </div>
+        <div class="tip-card">
+          <i class="fa-solid fa-expand"></i>
+          <h4>Close Up</h4>
+          <p>Zoom in to capture disease symptoms clearly and in detail.</p>
+        </div>
+        <div class="tip-card">
+          <i class="fa-solid fa-check"></i>
+          <h4>Multiple Uploads</h4>
+          <p>Upload multiple images of the same issue for better confirmation.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>Empowering Farmers with Technology</p>
+      <p>© 2025 CropGuard AI | All Rights Reserved</p>
+      <div class="social-icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-linkedin"></i>
+      </div>
+    </footer>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
