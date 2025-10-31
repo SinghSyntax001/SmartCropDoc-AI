@@ -114,7 +114,7 @@ def upload():
 def login():
     """Render login page (login.html)"""
     try:
-        with open(APP_ROOT / 'frontend' / 'login.html', 'r') as f:
+        with open(APP_ROOT / 'frontend' / 'login.html', 'r', encoding='utf-8') as f:
             content = f.read()
         return render_template_string(content)
     except FileNotFoundError:
