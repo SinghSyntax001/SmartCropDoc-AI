@@ -1,0 +1,159 @@
+=====================================
+CropGuard AI - STARTUP GUIDE
+=====================================
+
+✅ WHAT HAS BEEN COMPLETED:
+
+1. Backend Infrastructure
+   ✓ Flask application (app/main.py)
+   ✓ API endpoints (app/api/endpoints.py)
+   ✓ ML services (prediction, recommendation, enhancement)
+
+2. Frontend
+   ✓ Upload page (upload.html)
+   ✓ Home page (index.html)
+   ✓ Login page (login.html)
+   ✓ Profile page (profile.html)
+   ✓ Guide page (guide.html)
+   ✓ About page (about.html)
+
+3. JavaScript & Styling
+   ✓ Complete JavaScript integration (script.js)
+   ✓ Enhanced CSS with upload, results, loading states
+   ✓ Responsive design for all devices
+
+4. Configuration
+   ✓ .env file created
+   ✓ requirements.txt updated
+   ✓ setup.sh script for automated setup
+   ✓ run.py for starting the server
+   ✓ Placeholder images created
+
+5. All files pushed to GitHub ✓
+
+=====================================
+📋 TO RUN THE PROJECT:
+=====================================
+
+Step 1: Install dependencies
+   pip install Flask Flask-CORS python-dotenv Pillow
+
+Step 2: Add Groq API key to .env file
+   GROQ_API_KEY=gsk_your_actual_key_here
+   (Get free key from: https://console.groq.com/)
+
+Step 3: Start the server
+   python run.py
+   (or: python3 app/main.py)
+
+Step 4: Open browser
+   http://localhost:5000
+
+=====================================
+📌 FEATURE HIGHLIGHTS:
+=====================================
+
+✨ Disease Detection
+   - Upload image (JPG/PNG, max 10MB)
+   - AI analyzes and detects disease
+   - Shows confidence and severity level
+   - Displays Grad-CAM visualization
+
+✨ Treatment Recommendations
+   - Multi-language support (9 languages)
+   - LLM-powered farming advice
+   - Severity-based recommendations
+   - Downloadable reports
+
+✨ User Interface
+   - Drag-and-drop file upload
+   - Loading animations
+   - Error handling
+   - Mobile responsive design
+
+=====================================
+🔌 API ENDPOINTS:
+=====================================
+
+POST /api/predict
+- Upload image, get disease prediction
+- Returns: disease name, confidence, severity, grad-cam
+
+POST /api/recommend
+- Get treatment recommendation
+- Accepts: disease name, severity, language
+- Returns: formatted recommendation
+
+POST /api/predict-and-recommend
+- Combined endpoint (recommended)
+- Returns both prediction and recommendation
+
+=====================================
+📂 PROJECT FILES:
+=====================================
+
+Backend:
+  - app/main.py (Flask server)
+  - app/api/endpoints.py (API routes)
+  - app/services/ (ML models)
+
+Frontend:
+  - frontend/*.html (5 pages)
+  - frontend/styles/*.css (styling)
+  - frontend/scripts/script.js (JavaScript)
+  - frontend/images/ (logos & placeholders)
+
+Config:
+  - .env (environment variables)
+  - requirements.txt (dependencies)
+  - run.py (application runner)
+  - setup.sh (auto setup)
+
+=====================================
+🐛 TROUBLESHOOTING:
+=====================================
+
+Port 5000 already in use?
+  - Change PORT in .env
+  - Or: lsof -i :5000 && kill -9 <PID>
+
+Flask module not found?
+  - pip install Flask Flask-CORS
+
+API key error?
+  - Generate key at: https://console.groq.com/
+  - Update .env file
+
+Images not loading?
+  - Check: ls frontend/images/
+  - Run: bash setup.sh
+
+=====================================
+🚀 NEXT STEPS:
+=====================================
+
+1. Get Groq API key (free)
+2. Update .env with your key
+3. Run: python run.py
+4. Visit: http://localhost:5000
+5. Test upload to verify working
+
+For production deployment:
+- Use Gunicorn instead of Flask dev server
+- Set DEBUG=False in .env
+- Use environment-specific config
+- Set up database for history storage
+
+=====================================
+📞 SUPPORT:
+=====================================
+
+All files are on GitHub:
+https://github.com/SinghSyntax001/SmartCropDoc-AI
+
+Documentation is in:
+- README.md (detailed setup)
+- STARTUP_GUIDE.txt (this file)
+- Code comments in source files
+
+✅ PROJECT STATUS: COMPLETE AND READY TO RUN
