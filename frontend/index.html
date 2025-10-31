@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CropGuard AI - Plant Disease Detection</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <nav>
+        <div class="logo-container">
+          <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="CropGuard AI Logo" /></a>
+          <h2 class="logo-heading">CropGuard AI</h2>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li>
+              <a href="/">HOME</a>
+            </li>
+            <li>
+              <a href="/about">ABOUT</a>
+            </li>
+            <li>
+              <a href="/guide">GUIDE</a>
+            </li>
+            {% if logged_in %}
+              <li>
+                <a href="/profile">LOGIN</a>
+              </li>
+              <li>
+                <a href="/logout">LOGOUT</a>
+              </li>
+            {% else %}
+              <li>
+                <a href="/login">LOGIN</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+        <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+      </nav>
+      <div class="hero-text">
+        <h1>🌱 DETECT CROP DISEASE INSTANTLY</h1>
+        <p>Upload a photo of your crop and let AI protect your harvest with accurate disease detection.</p>
+        <a href="/upload" class="btn">Upload Image</a>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <i class="fa-solid fa-upload"></i>
+          <h3>Step 1: Upload</h3>
+          <p>Upload a clear picture of your crop leaf.</p>
+        </div>
+        <div class="step">
+          <i class="fa-solid fa-robot"></i>
+          <h3>Step 2: AI Detects</h3>
+          <p>Our deep learning model identifies the disease instantly.</p>
+        </div>
+        <div class="step">
+          <i class="fa-solid fa-notes-medical"></i>
+          <h3>Step 3: Get Recommendations</h3>
+          <p>Receive actionable treatment and prevention tips.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features">
+      <h2>Why Choose CropGuard AI?</h2>
+      <div class="feature-cards">
+        <div class="card">
+          <i class="fa-solid fa-brain"></i>
+          <h3>AI-Powered</h3>
+          <p>Reliable predictions using advanced deep learning models.</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-language"></i>
+          <h3>Multilingual</h3>
+          <p>Available in multiple languages for every farmer.</p>
+        </div>
+        <div class="card">
+          <i class="fa-solid fa-seedling"></i>
+          <h3>Sustainable</h3>
+          <p>Promotes eco-friendly farming practices.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUPPORTED CROPS & DISEASES -->
+    <section class="supported">
+      <h2>Supported Crops and Diseases</h2>
+
+      <!-- Fruits Section -->
+      <h3 class="sub-heading">🍎 Fruits</h3>
+      <div class="grid">
+        <div class="grid-item">
+          <img src="{{ url_for('static', filename='images/apple.jpg') }}" alt="Apple" />
+          <h4>Apple</h4>
+          <p>Apple Scab, Black Rot, Cedar Apple Rust.</p>
+        </div>
+        <div class="grid-item">
+          <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mango" />
+          <h4>Mango</h4>
+          <p>Anthracnose, Powdery Mildew, Bacterial Canker.</p>
+        </div>
+        <div class="grid-item">
+          <img src="{{ url_for('static', filename='images/banana.jpg') }}" alt="Banana" />
+          <h4>Banana</h4>
+          <p>Black Sigatoka, Yellow Sigatoka, Panama Disease, Moko.</p>
+        </div>
+        <div class="grid-item">
+          <img src="{{ url_for('static', filename='images/grapes.jpg') }}" alt="Grapes" />
+          <h4>Grapes</h4>
+          <p>Powdery Mildew, Downy Mildew, Black Rot.</p>
+        </div>
+      </div>
+
+      <!-- Vegetables Section -->
+      <h3 class="sub-heading">🥦 Vegetables</h3>
+      <div class="grid">
+        <div class="grid-item">
+          <img src="{{ url_for('static', filename='images/potato.jpg') }}" alt="Potato" />
+          <h4>Potato</h4>
+          <p>Late Blight, Early Blight.</p>
+        </div>
+        <div class="grid-item">
+          <img src="{{ url_for('static', filename='images/tomato.jpg') }}" alt="Tomato" />
+          <h4>Tomato</h4>
+          <p>Early Blight, Late Blight, Bacterial Rot, Spider Mite.</p>
+        </div>
+        <div class="grid-item">
+          <img src="{{ url_for('static', filename='images/cauliflower.jpg') }}" alt="Cauliflower" />
+          <h4>Cauliflower</h4>
+          <p>Downy Mildew, Black Rot, Clubroot.</p>
+        </div>
+        <div class="grid-item">
+          <img src="{{ url_for('static', filename='images/corn.jpg') }}" alt="Corn" />
+          <h4>Corn</h4>
+          <p>Leaf Blight, Common Rust, Gray Leaf Spot.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta">
+      <h2>Protect Your Crops Today</h2>
+      <p>Don’t wait for diseases to spread. Upload your crop image now and get instant AI-powered insights.</p>
+      <a href="/upload" class="btn">Upload Image Now</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>Empowering Farmers with Technology</p>
+      <p>© 2025 CropGuard AI | All Rights Reserved</p>
+      <div class="social-icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-linkedin"></i>
+      </div>
+    </footer>
+    <script src="/static/script.js"></script>
+  </body>
+</html>
