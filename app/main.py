@@ -126,7 +126,7 @@ def login():
 def profile():
     """Render profile page (profile.html)"""
     try:
-        with open(APP_ROOT / 'frontend' / 'profile.html', 'r') as f:
+        with open(APP_ROOT / 'frontend' / 'profile.html', 'r', encoding='utf-8') as f:
             content = f.read()
         return render_template_string(content)
     except FileNotFoundError:
