@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - CropGuard AI</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+    <!-- NAVIGATION -->
+    <section class="hero">
+      <nav>
+        <div class="logo-container">
+          <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="CropGuard AI Logo" /></a>
+          <h2 class="logo-heading">CropGuard AI</h2>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li>
+              <a href="/">HOME</a>
+            </li>
+            <li>
+              <a href="/about">ABOUT</a>
+            </li>
+            <li>
+              <a href="/guide">GUIDE</a>
+            </li>
+            <li>
+              <a href="/login">LOGIN</a>
+            </li>
+          </ul>
+        </div>
+        <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+      </nav>
+    </section>
+
+    <!-- LOGIN SECTION -->
+    <section class="login-section">
+      <div class="login-container">
+        <div class="login-form">
+          <h2>
+            <i class="fa-solid fa-user"></i>
+            Login to Your Account
+          </h2>
+          <p class="login-subtitle">Sign in to access your disease detection history</p>
+
+          <!-- Error Message -->
+          <div id="loginError" class="error-message" style="display: none"></div>
+
+          <!-- Login Form -->
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="email">
+                <i class="fa-solid fa-envelope"></i> Email Address
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="your@email.com"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password">
+                <i class="fa-solid fa-lock"></i> Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                placeholder="Enter your password"
+              />
+            </div>
+
+            <div class="form-group checkbox">
+              <input type="checkbox" id="rememberMe" name="rememberMe" />
+              <label for="rememberMe">Remember me</label>
+            </div>
+
+            <button type="submit" class="btn" onclick="handleLogin(event)">
+              <i class="fa-solid fa-sign-in-alt"></i> Sign In
+            </button>
+          </form>
+
+          <!-- Additional Links -->
+          <div class="login-links">
+            <p>
+              Don't have an account?
+              <a href="#signup">Create one now</a>
+            </p>
+            <p>
+              <a href="#forgot">Forgot your password?</a>
+            </p>
+          </div>
+        </div>
+
+        <!-- Info Panel -->
+        <div class="login-info">
+          <h3>
+            <i class="fa-solid fa-lightbulb"></i>
+            Why Create an Account?
+          </h3>
+          <ul>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              Save your disease detection history
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              Track disease trends over time
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              Get personalized recommendations
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              Access offline resources
+            </li>
+            <li>
+              <i class="fa-solid fa-check"></i>
+              Connect with other farmers
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- GUEST ACCESS CTA -->
+    <section class="guest-access">
+      <div class="guest-content">
+        <h3>Want to try without logging in?</h3>
+        <p>Use our disease detection tool without creating an account.</p>
+        <a href="/upload" class="btn">
+          <i class="fa-solid fa-arrow-right"></i> Go to Upload Page
+        </a>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>Empowering Farmers with Technology</p>
+      <p>© 2025 CropGuard AI | All Rights Reserved</p>
+      <div class="social-icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-linkedin"></i>
+      </div>
+    </footer>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
