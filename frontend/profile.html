@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile - CropGuard AI</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body>
+    <!-- NAVIGATION -->
+    <section class="hero">
+      <nav>
+        <div class="logo-container">
+          <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="CropGuard AI Logo" /></a>
+          <h2 class="logo-heading">CropGuard AI</h2>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li>
+              <a href="/">HOME</a>
+            </li>
+            <li>
+              <a href="/about">ABOUT</a>
+            </li>
+            <li>
+              <a href="/guide">GUIDE</a>
+            </li>
+            <li>
+              <a href="/upload">UPLOAD</a>
+            </li>
+            <li>
+              <a href="/logout">LOGOUT</a>
+            </li>
+          </ul>
+        </div>
+        <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+      </nav>
+    </section>
+
+    <!-- PROFILE SECTION -->
+    <section class="profile-section">
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <div class="profile-info">
+          <div class="profile-avatar">
+            <i class="fa-solid fa-user-circle"></i>
+          </div>
+          <div class="profile-details">
+            <h2 id="userName">Farmer Name</h2>
+            <p id="userEmail">farmer@email.com</p>
+            <p class="profile-location">
+              <i class="fa-solid fa-map-pin"></i>
+              <span id="userLocation">Location</span>
+            </p>
+          </div>
+          <button class="btn-secondary" onclick="editProfile()">
+            <i class="fa-solid fa-edit"></i> Edit Profile
+          </button>
+        </div>
+      </div>
+
+      <!-- Statistics -->
+      <div class="profile-stats">
+        <div class="stat-card">
+          <i class="fa-solid fa-image"></i>
+          <div class="stat-content">
+            <h4>Uploads</h4>
+            <p class="stat-number" id="uploadCount">0</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-virus"></i>
+          <div class="stat-content">
+            <h4>Diseases Detected</h4>
+            <p class="stat-number" id="diseaseCount">0</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-calendar"></i>
+          <div class="stat-content">
+            <h4>This Month</h4>
+            <p class="stat-number" id="monthCount">0</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-trophy"></i>
+          <div class="stat-content">
+            <h4>Level</h4>
+            <p class="stat-number" id="userLevel">Beginner</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="activity-section">
+        <h3>
+          <i class="fa-solid fa-history"></i>
+          Detection History
+        </h3>
+        <div class="history-table-wrapper">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Crop</th>
+                <th>Disease Detected</th>
+                <th>Severity</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="historyBody">
+              <tr>
+                <td colspan="5" class="empty-state">
+                  <i class="fa-solid fa-inbox"></i>
+                  No detection history yet. <a href="/upload">Start analyzing</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="quick-actions">
+        <h3>Quick Actions</h3>
+        <div class="action-grid">
+          <a href="/upload" class="action-card">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <h4>New Analysis</h4>
+            <p>Upload and analyze a crop</p>
+          </a>
+          <a href="#recommendations" class="action-card">
+            <i class="fa-solid fa-lightbulb"></i>
+            <h4>Recommendations</h4>
+            <p>View saved recommendations</p>
+          </a>
+          <a href="#resources" class="action-card">
+            <i class="fa-solid fa-book"></i>
+            <h4>Resources</h4>
+            <p>Access farming guides</p>
+          </a>
+          <a href="#settings" class="action-card">
+            <i class="fa-solid fa-gear"></i>
+            <h4>Settings</h4>
+            <p>Manage account preferences</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Preferences Section -->
+      <div class="preferences-section">
+        <h3>
+          <i class="fa-solid fa-sliders"></i>
+          Preferences
+        </h3>
+        <div class="pref-grid">
+          <div class="pref-item">
+            <label for="prefLanguage">Preferred Language</label>
+            <select id="prefLanguage">
+              <option value="en">English</option>
+              <option value="hi">Hindi</option>
+              <option value="es">Spanish</option>
+              <option value="fr">French</option>
+              <option value="pt">Portuguese</option>
+            </select>
+          </div>
+          <div class="pref-item">
+            <label for="prefNotifications">Notifications</label>
+            <select id="prefNotifications">
+              <option value="all">All Updates</option>
+              <option value="important">Important Only</option>
+              <option value="none">Disabled</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>Empowering Farmers with Technology</p>
+      <p>© 2025 CropGuard AI | All Rights Reserved</p>
+      <div class="social-icons">
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-linkedin"></i>
+      </div>
+    </footer>
+
+    <script src="/static/script.js"></script>
+  </body>
+</html>
