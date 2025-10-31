@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - CropGuard AI</title>
+    <link rel="stylesheet" href="static/about.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- HERO SECTION -->
+    <section class="about-hero">
+      <nav>
+        <div class="logo-container">
+          <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" class="logo" alt="CropGuard AI Logo" /></a>
+          <h2 class="logo-heading">CropGuard AI</h2>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <i class="fa-solid fa-xmark" onclick="hideMenu()"></i>
+          <ul>
+            <li>
+              <a href="/">HOME</a>
+            </li>
+            <li>
+              <a href="/about" class="active">ABOUT</a>
+            </li>
+            <li>
+              <a href="/guide">GUIDE</a>
+            </li>
+            {% if logged_in %}
+              <li>
+                <a href="/profile">LOGIN</a>
+              </li>
+              <li>
+                <a href="/logout">LOGOUT</a>
+              </li>
+            {% else %}
+              <li>
+                <a href="/login">LOGIN</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+        <i class="fa-solid fa-bars" onclick="showMenu()"></i>
+      </nav>
+      <div class="hero-text">
+        <h1>🌿 About Us</h1>
+        <p>Meet the passionate team behind CropGuard AI</p>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about">
+      <h2>Who We Are</h2>
+      <p class="intro">We are a team of three dedicated individuals working together to bring innovation into agriculture. Our mission is to help farmers protect their crops with the power of Artificial Intelligence. Each of us has a key role, but we also collaborate and assist one another in every step of the journey.</p>
+
+      <div class="team-grid">
+        <!-- TEAM MEMBER 1 -->
+        <div class="team-member">
+          <img src="{{ url_for('static', filename='images/shashank.jpg') }}" alt="Shashank Singh - ML Specialist" />
+          <h3>Shashank Singh</h3>
+          <i class="fas fa-brain"></i>
+          <p>Focused on building and optimizing machine learning models for accurate crop disease detection.</p>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/shashank-singh-14a682282"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/SinghSyntax001"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/_its.alpha_/"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <!-- TEAM MEMBER 2 -->
+        <div class="team-member">
+          <img src="{{ url_for('static', filename='images/vishakha.jpg') }}" alt="Vishakha Chauhan - UI/UX Specialist" />
+          <h3>Vishakha Chauhan</h3>
+          <i class="fas fa-pencil-ruler"></i>
+          <p>Designing intuitive user interfaces and preparing documentation for smooth project understanding.</p>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/vishakha-chauhan1107"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Chauhan-Vishakhaa"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/vish4kh4/"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+
+        <!-- TEAM MEMBER 3 -->
+        <div class="team-member">
+          <img src="{{ url_for('static', filename='images/pallav.jpg') }}" alt="Pallav Prakash - Web Developer" />
+          <h3>Pallav Prakash</h3>
+          <i class="fas fa-code"></i>
+          <p>Developing the platform, integrating AI models, and ensuring seamless functionality.</p>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/pallav-prakash-12aa2625a/"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Pallavprakash"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/prakash.pallav.22/"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GET IN TOUCH SECTION -->
+    <section class="contact">
+      <h2>Get in Touch</h2>
+      <p class="contact-intro">Have questions or want to collaborate? We’d love to hear from you!</p>
+
+      <div class="contact-container">
+        <div class="contact-info">
+          <p>
+            <i class="fas fa-envelope"></i> support@cropguardai.com
+          </p>
+          <p>
+            <i class="fas fa-phone"></i> +91 98765 43210
+          </p>
+          <p>
+            <i class="fas fa-map-marker-alt"></i> Lucknow, Uttar Pradesh, India
+          </p>
+        </div>
+
+        <form class="contact-form">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea placeholder="Your Message" rows="5" required></textarea>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Protect Your Crops Today</h2>
+      <p>Don’t wait for diseases to spread. Upload your crop image now and get instant AI-powered insights.</p>
+      <a href="/upload" class="btn">Upload Image Now</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p>© 2025 CropGuard AI | All Rights Reserved</p>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </footer>
+
+    <script>
+      var navLinks = document.getElementById('navLinks')
+      function showMenu() {
+        navLinks.style.right = '0'
+      }
+      function hideMenu() {
+        navLinks.style.right = '-200px'
+      }
+    </script>
+  </body>
+</html>
