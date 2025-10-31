@@ -136,8 +136,9 @@ def profile():
 
 # ============ API ROUTE REGISTRATION ============
 
-# Import API endpoints (routes are registered within endpoints.py)
-from app.api import endpoints as api_endpoints
+# Import and register API blueprint
+from app.api.endpoints import api_bp
+app.register_blueprint(api_bp)
 
 
 # ============ ERROR HANDLERS ============
